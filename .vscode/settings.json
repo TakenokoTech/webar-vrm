@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    "node_modules/**": true,
+    "dist/**": true,
+    "temp/**": true,
+    "*-lock.json/**": true,
+    "LICENSE": true
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true
+}
