@@ -1,48 +1,48 @@
 {
-  "name": "webar-vrm",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack --mode=development",
-    "watch": "webpack -w --mode=development",
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "server": "tsc --pretty ./websocket/server.ts --outDir dist && node ./dist/server.js",
-    "deploy": "set NODE_ENV=production && webpack",
-    "cp": "cpx \"static/assets/*\" build/assets -v",
-    "gh": "gh-pages -d build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TakenokoTech/webar-vrm.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TakenokoTech/webar-vrm/issues"
-  },
-  "homepage": "https://github.com/TakenokoTech/webar-vrm#readme",
-  "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/preset-typescript": "^7.3.3",
-    "aframe": "^0.9.1",
-    "ar.js": "^1.6.2",
-    "babel": "^6.23.0",
-    "babel-loader": "^8.0.5",
-    "copy-webpack-plugin": "^5.0.2",
-    "cpx": "^1.5.0",
-    "jsartoolkit": "0.0.0",
-    "three": "^0.103.0",
-    "threex": "^1.0.0",
-    "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
-  }
+    "name": "webar-vrm",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "webpack --mode=development",
+        "watch": "webpack -w --mode=development",
+        "type-check": "tsc --noEmit",
+        "type-check:watch": "npm run type-check -- --watch",
+        "build": "npm run build:types && npm run build:js",
+        "build:types": "tsc --emitDeclarationOnly",
+        "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+        "server": "tsc --pretty ./websocket/server.ts --outDir dist && node ./dist/server.js",
+        "deploy": "set NODE_ENV=production && webpack",
+        "cp": "cpx \"static/assets/*\" build/assets -v && cpx \"static/*.html\" build/ -v ",
+        "gh": "gh-pages -d build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TakenokoTech/webar-vrm.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TakenokoTech/webar-vrm/issues"
+    },
+    "homepage": "https://github.com/TakenokoTech/webar-vrm#readme",
+    "devDependencies": {
+        "@babel/cli": "^7.4.3",
+        "@babel/core": "^7.4.3",
+        "@babel/plugin-proposal-class-properties": "^7.4.0",
+        "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+        "@babel/preset-env": "^7.4.3",
+        "@babel/preset-typescript": "^7.3.3",
+        "aframe": "^0.9.1",
+        "ar.js": "^1.6.2",
+        "babel": "^6.23.0",
+        "babel-loader": "^8.0.5",
+        "copy-webpack-plugin": "^5.0.2",
+        "cpx": "^1.5.0",
+        "jsartoolkit": "0.0.0",
+        "three": "^0.103.0",
+        "threex": "^1.0.0",
+        "webpack": "^4.30.0",
+        "webpack-cli": "^3.3.0"
+    }
 }

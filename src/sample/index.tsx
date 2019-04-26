@@ -1,16 +1,10 @@
 // import * as THREE from "three";
 // import "threex";
-// import "jsartoolkit/js/artoolkit.api.js";
-// import "jsartoolkit/js/artoolkit.three.js";
-// import "three/build/three";
+// import * as THREE from "three/build/three";
+// import * as THREEx from "ar.js/aframe/build/aframe-ar";
+// import "ar.js/three.js/build/ar";
 // import "../vendor/THREE.WebAR";
 // import "ar.js/three.js/build/ar";
-
-// const image = document.createElement("img");
-// image.src = `https://chart.apis.google.com/chart?chs=150x150&cht=qr&chl=${
-//     location.href
-// }`;
-// document.body.appendChild(image);
 
 //===================================================================
 // three.js の各種設定
@@ -46,7 +40,7 @@ source.init(function onReady() {
 // arToolkitContext（カメラパラメータ、マーカ検出設定）
 //===================================================================
 var context = new THREEx.ArToolkitContext({
-    debug: true, // デバッグ用キャンバス表示（デフォルトfalse）
+    debug: false, // デバッグ用キャンバス表示（デフォルトfalse）
     cameraParametersUrl: "assets/camera_para.dat", // カメラパラメータファイル
     detectionMode: "mono", // 検出モード（color/color_and_matrix/mono/mono_and_matrix）
     imageSmoothingEnabled: true, // 画像をスムージングするか（デフォルトfalse）

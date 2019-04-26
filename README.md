@@ -4,7 +4,7 @@ webar-vrm is sample code for ar viewer.
 
 ## marker
 
-<img src="./.github/hiro.marker.jpg" />
+<img src="./static/assets/hiro.marker.jpg" />
 
 ## Libraries Used
 
