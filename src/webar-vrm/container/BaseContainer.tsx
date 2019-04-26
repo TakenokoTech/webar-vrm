@@ -1,0 +1,3 @@
+interface BaseContainer {
+    componentDidMount(): void;
+}
