@@ -7,7 +7,7 @@ var development = {
     vrm: "./src/webar-vrm/index"
   },
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "build/js"),
     filename: "[name].bundle.js"
   },
   resolve: {
@@ -33,7 +33,7 @@ var production = {
     vrm: "./src/webar-vrm/index"
   },
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, "build/js"),
     filename: "[name].bundle.js"
   },
   resolve: {
