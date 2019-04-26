@@ -7,7 +7,7 @@ var development = {
     vrm: "./src/webar-vrm/index"
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "build"),
     filename: "[name].bundle.js"
   },
   resolve: {
@@ -22,12 +22,14 @@ var development = {
       }
     ]
   },
-  devtool: "inline-source-map"
+  devtool: "inline-source-map",
+  target: 'node'
 };
 
 var production = {
   mode: "production",
   entry: {
+    sample: "./src/sample/index",
     vrm: "./src/webar-vrm/index"
   },
   output: {
@@ -47,9 +49,12 @@ var production = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: ".", to: ".", ignore: ["!*.css"] }], {
-      context: "static/css"
-    })
+    // new CopyWebpackPlugin([{ from: ".", to: ".", ignore: ["!*.css"] }], {
+    //   context: "static/css"
+    // }),
+    new CopyWebpackPlugin([{ from: ".", to: ".", ignore: ["!*.dat"] }, { from: ".", to: ".", ignore: ["!*.patt"] }], {
+      context: "static"
+    }),
   ]
 };
 
