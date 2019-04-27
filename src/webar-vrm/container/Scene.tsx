@@ -1,5 +1,8 @@
 import * as THREE from "three";
 import BaseContainer from "./BaseContainer";
+import { ArBox } from "./Object";
+import { cloaking } from "./Object";
+import { loadVRM } from "./Object";
 
 export class Scene implements BaseContainer {
     public scene = new THREE.Scene();
@@ -8,25 +11,39 @@ export class Scene implements BaseContainer {
     private renderer: THREE.WebGLRenderer;
     private source: THREEx.ArToolkitSource;
     private context: THREEx.ArToolkitContext;
+    private marker: THREE.Group;
 
     constructor() {
+        this.render = this.render.bind(this);
+
         this.renderer = this.createRenderer();
         [this.camera, this.light] = this.setupThree();
         [this.source, this.context] = this.createContext();
+        this.marker = this.createMarker();
         this.scene.add(this.camera);
         this.scene.add(this.light);
+        this.scene.add(this.marker);
     }
 
     public componentDidMount() {
+        console.log("componentDidMount");
         document.body.appendChild(this.renderer.domElement);
         window.addEventListener("resize", () => onResize());
+        this.render();
+    }
+
+    render() {
+        requestAnimationFrame(this.render);
+        if (this.source.ready === false) return;
+        this.context.update(this.source.domElement);
+        this.renderer.render(this.scene, this.camera);
     }
 
     public onResize() {
-        source.onResizeElement();
-        source.copyElementSizeTo(renderer.domElement);
-        context.arController &&
-            source.copyElementSizeTo(context.arController.canvas);
+        this.source.onResizeElement();
+        this.source.copyElementSizeTo(this.renderer.domElement);
+        this.context.arController &&
+            this.source.copyElementSizeTo(this.context.arController.canvas);
     }
 
     createRenderer(): THREE.WebGLRenderer {
@@ -62,38 +79,25 @@ export class Scene implements BaseContainer {
             canvasWidth: source.parameters.sourceWidth,
             canvasHeight: source.parameters.sourceHeight
         });
-        source.init(() => onResize());
+        source.init(() => this.onResize());
         context.init(() =>
             this.camera.projectionMatrix.copy(context.getProjectionMatrix())
         );
         return [source, context];
     }
 
-    marker() {
-        var marker1 = new THREE.Group(); // マーカをグループとして作成
-        var controls = new THREEx.ArMarkerControls(context, marker1, {
-            // マーカを登録
-            type: "pattern", // マーカのタイプ
-            patternUrl: "assets/pattern-hiro.patt" // マーカファイル
-        });
-        scene.add(marker1); // マーカをシーンに追加
-        // モデル（メッシュ）
-        var geo = new THREE.CubeGeometry(1, 1, 1); // cube ジオメトリ（サイズは 1x1x1）
-        var mat = new THREE.MeshNormalMaterial({
-            // マテリアルの作成
-            transparent: true, // 透過
-            opacity: 0.5, // 不透明度
-            side: THREE.DoubleSide // 内側も描く
-        });
-        var mesh1 = new THREE.Mesh(geo, mat); // メッシュを生成
-        mesh1.name = "cube"; // メッシュの名前（後でピッキングで使う）
-        mesh1.position.set(0, 0.5, 0); // 初期位置
-        marker1.add(mesh1); // メッシュをマーカに追加
-        // マーカ隠蔽（cloaking）
-        var videoTex = new THREE.VideoTexture(source.domElement); // 映像をテクスチャとして取得
-        videoTex.minFilter = THREE.NearestFilter; // 映像テクスチャのフィルタ処理
-        var cloak = new THREEx.ArMarkerCloak(videoTex); // マーカ隠蔽(cloak)オブジェクト
-        cloak.object3d.material.uniforms.opacity.value = 1.0; // cloakの不透明度
-        marker1.add(cloak.object3d); // cloakをマーカに追加
+    createMarker(): THREE.Group {
+        const marker = new THREE.Group();
+        const param = {
+            type: "pattern",
+            patternUrl: "assets/pattern-hiro.patt"
+        };
+        new THREEx.ArMarkerControls(this.context, marker, param);
+        (async () => {
+            marker.add(await loadVRM());
+            // marker.add(await ArBox());
+            // marker.add(cloaking(new THREE.VideoTexture(this.source.domElement)));
+        })();
+        return marker;
     }
 }

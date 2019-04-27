@@ -3,10 +3,12 @@ declare module THREEx {
         arController: any;
         constructor(param: any);
         init(f: any): void;
+        update(el: HTMLVideoElement): void;
         getProjectionMatrix(): THREE.Matrix4;
     }
     export class ArToolkitSource {
         domElement: HTMLVideoElement;
+        ready: boolean;
         constructor(param: any);
         init(f: any): void;
         parameters: any;

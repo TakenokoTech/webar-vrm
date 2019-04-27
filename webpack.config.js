@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 var development = {
     entry: {
         sample: "./src/sample/index",
-        vrm: "./src/webar-vrm/index"
+        vrm: ["@babel/polyfill", "./src/webar-vrm/index"]
     },
     output: {
         path: path.resolve(__dirname, "build/js"),
@@ -30,7 +30,7 @@ var production = {
     mode: "production",
     entry: {
         sample: "./src/sample/index",
-        vrm: "./src/webar-vrm/index"
+        vrm: ["@babel/polyfill", "./src/webar-vrm/index"]
     },
     output: {
         path: path.resolve(__dirname, "build/js"),
