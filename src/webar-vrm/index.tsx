@@ -1,5 +1,3 @@
-import Scene from "./container/Scene";
-
+import { Scene } from "./container/Scene";
 const scene = new Scene();
-
 scene.componentDidMount();
