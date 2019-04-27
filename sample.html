@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+	<title>WebVRM</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+	<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.5.0/aframe/build/aframe-ar.js"></script>
+	<style>
+		body {
+			font-family: Monospace;
+			background-color: #58b3e4 /*rgb(0, 255, 0)*/;
+			color: #fff;
+			margin: 0px;
+			overflow: hidden;
+		}
+		#stat {
+			z-index: 200;
+			position: absolute;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="threeCanvas" style="z-index: 2;position: absolute;"></div>
+	<div id="stat"></div>
+	<img src="./assets/hiro.marker.jpg" style="bottom: 8px;right: 8px;position: fixed;">
+	<script src="./js/sample.bundle.js"></script>
+</body>
+</html>
