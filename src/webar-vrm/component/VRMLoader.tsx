@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import GLTFLoader from "three-gltf-loader";
+import humanoidBone from "../../../schema/humanoid.json";
 
 export default class VrmLoader {
     load(url: string, callback: (vrm: THREE.GLTF) => void) {
@@ -43,4 +44,33 @@ export default class VrmLoader {
             mesh.material = createMaterial(mesh.material);
         }
     }
+
+    static attachHumanoidBone(vrm: any): { [n: number]: THREE.Bone } {
+        const humanoidMap: { [n: number]: THREE.Bone } = {};
+        const entries = vrm.userData.gltfExtensions.VRM.humanoid.humanBones.entries();
+        for (const [i, humanBone] of entries) {
+            for (const [j, node] of vrm.parser.json.nodes.entries()) {
+                if (humanBone.node == j) {
+                    vrm.scene.traverse((object: any) => {
+                        if (object.name == node.name)
+                            humanoidMap[humanoidBone[humanBone.bone]] = object;
+                    });
+                }
+            }
+        }
+        return humanoidMap;
+    }
+}
+
+export interface VrmAnimation {
+    name: string;
+    bone: string;
+    keys: Key[];
+}
+
+export interface Key {
+    pos: number[];
+    rot: number[];
+    scl: number[];
+    time: number;
 }
