@@ -51,7 +51,7 @@
         "webpack-cli": "^3.3.0"
     },
     "dependencies": {
-        "three": "^0.103.0",
+        "three": "^0.137.0",
         "threex": "^1.0.0",
         "three-fbx-loader": "^1.0.3",
         "three-gltf-loader": "^1.101.0",
